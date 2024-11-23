@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <%- include ("partials/head.ejs") %>
+        <title>Carte <%= name %></title>
+        <style>
+            .card {
+                width: 18rem;
+                margin-bottom: 1rem;
+            }
+        </style>
+    </head>
+    <body>
+        <%- include ("partials/navbar.ejs", {title: `Carte ${name}`}) %>
+        <div class="container">
+            <div class="row">
+                <% for(var i=0; i < rarity?.length; i++) {%>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="<%= link?.replace('{name}', name.toLowerCase())?.replace('{rarity}', rarity[i]?.id) %>" 
+                                class="card-img-top" 
+                                alt="Carte <%= rarity[i]?.name || 'Unknown' %>">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= rarity[i]?.name || 'Unknown' %></h5>
+                            </div>
+                        </div>
+                    </div>
+                 <% } %>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </body>
+</html>
+

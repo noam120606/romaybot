@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "colors": "^1.4.0",
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "events": "^3.3.0",
+    "express": "^4.21.1",
+    "express-session": "^1.18.1",
+    "moment": "^2.30.1",
+    "mysql": "^2.18.1",
+    "tmi.js": "^1.8.5"
+  },
+  "name": "romaybot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
