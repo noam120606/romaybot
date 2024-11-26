@@ -120,6 +120,61 @@ module.exports = {
             "name": "Bananazi",
             "rarity": 0,
             "type": "Collection"
+        },
+
+        { // graisss
+            "id": 18,
+            "name": "Graisss",
+            "rarity": 8,
+            "type": "Collection"
+        },
+        {
+            "id": 19,
+            "name": "Graisss",
+            "rarity": 7,
+            "type": "Collection"
+        },
+        {
+            "id": 20,
+            "name": "Graisss",
+            "rarity": 6,
+            "type": "Collection"
+        },
+        {
+            "id": 21,
+            "name": "Graisss",
+            "rarity": 5,
+            "type": "Collection"
+        },
+        {
+            "id": 22,
+            "name": "Graisss",
+            "rarity": 4,
+            "type": "Collection"
+        },
+        {
+            "id": 23,
+            "name": "Graisss",
+            "rarity": 3,
+            "type": "Collection"
+        },
+        {
+            "id": 24,
+            "name": "Graisss",
+            "rarity": 2,
+            "type": "Collection"
+        },
+        {
+            "id": 25,
+            "name": "Graisss",
+            "rarity": 1,
+            "type": "Collection"
+        },
+        {
+            "id": 26,
+            "name": "Graisss",
+            "rarity": 0,
+            "type": "Collection"
         }
     ]
 }
