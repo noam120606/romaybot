@@ -2,6 +2,8 @@ const randint = require('../../functions/randint.js');
 
 module.exports = async (bot, data) => {
 
+    if (bot.dev) return;
+
     // ajout monnaie a l'utilisateur
     const monnaie = data.subscriber ? randint(10, 20) : randint(5, 15);
     bot.twitch.levels.add(data['user-id'], monnaie);

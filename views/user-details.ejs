@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <title><%= discordName %></title>
+        <link rel="icon" href="<%= discordAvatar %>">
+        <%- include ("partials/head.ejs") %>
+        <style>
+            .pokekos:hover {
+                transform: scale(1.05);
+                transition: transform 0.2s;
+            }
+            .card-link {
+                text-decoration: none;
+            }
+            section.bloc {
+                width:45%;
+                position:relative;
+                float:left;
+                height:200px;
+            }
+            section.left {
+                border-right:1px solid #f3f3f3;
+                padding-right:20px;
+            }
+            section.right {
+                border-left:1px solid #c0c0c0;
+                padding-left:20px;
+            }
+            label {
+                display:block;
+            }
+        </style>
+    </head>
+    <body>
+        <%- include ("partials/navbar.ejs", {title: "Liste des utilisateurs"}) %>
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header text-center bg-primary text-white">
+                            <h2><%= discordName %></h2>
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="<%= discordAvatar %>" alt="Avatar de <%= discordName %>" class="rounded-circle mb-3" style="width: 150px; height: 150px;">
+                            <h4 class="mb-3">Bienvenue sur le profil de <%= discordName %>!</h4>
+                            <p class="text-muted">Voici quelques informations :</p>
+                            <section class="col-mb-3 bloc left">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><strong>Monnaie :</strong> <%= monnaie %></li>
+                                    <li class="list-group-item"><strong>Cartes totales :</strong> <%= cards.length %></li>
+                                    <li class="list-group-item"><strong>Cartes manquantes :</strong> <%= card_max - cards.length + 1 %></li>
+                                </ul>
+                            </section>
+                            <section class="col-mb-3 bloc right">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><strong>Pseudo Discord :</strong> <%= discordName %></li>
+                                    <li class="list-group-item"><strong>Pseudo Twitch :</strong> <%= twitchName %></li>
+                                </ul>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <% for(var i=0; i < cards?.length; i++) {%>
+                    <div class="col-md-4 mb-4">
+                        <a href="/details/<%= cards[i].name.toLowerCase() %>" class="card-link">
+                            <div class="card pokekos">
+                                <img src="<%= link?.replace('{name}', cards[i].name.toLowerCase())?.replace('{rarity}', cards[i].rarity) %>" class="card-img-top" alt="Image carte <%= cards[i].name %>">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= cards[i].name %> <%= cards[i].rarityName %></h5>
+                                    <p class="card-text">Cette carte est possédée en <strong><%= cards[i].quantity %> exemplaire<%= cards[i].quantity > 1 ? 's' : '' %></strong>.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </body>
+</html>

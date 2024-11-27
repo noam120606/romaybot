@@ -44,6 +44,7 @@ class Webserver {
         });
         this.app.get('/details/:name', (req, res) => {
             const cards = cartes.filter(c => c.name.toLowerCase() === req.params.name.toLowerCase());
+            if (cards.length === 0) return res.redirect('/');
             const rarityAvailable = cards.map(c => rarity[c.rarity]);
             res.render('card-details', {
                 name: maj(cards[0].name.toLowerCase()),
@@ -51,6 +52,37 @@ class Webserver {
                 link: this.bot.config.cards_img_link,
             });
         });
+        this.app.get('/user', (req, res) => {
+            const users = this.bot.links.map((twitchId, discordId) => ({
+                twitchId,
+                discordId,
+                twitchName: this.bot.twitch.users.getUser(twitchId),
+                discordName: this.bot.users.cache.get(discordId)?.username,
+                discordAvatar: this.bot.users.cache.get(discordId)?.displayAvatarURL(),
+            }));
+            return res.render('user-list', {users});
+        });
+        this.app.get('/user/:discordId', async (req, res) => {
+            const user = this.bot.links.get(req.params.discordId);
+            if (!user) return res.redirect('/user');
+            const discordUser = this.bot.users.cache.get(req.params.discordId);
+            if (!discordUser) return res.redirect('/user');
+            const inventory = await this.bot.cards.getInventory(discordUser.id);
+            if (!inventory) return res.redirect('/user');
+            return res.render('user-details', {
+                twitchId: user,
+                discordId: discordUser.id,
+                twitchName: this.bot.twitch.users.getUser(user),
+                discordName: discordUser.username,
+                discordAvatar: discordUser.displayAvatarURL(),
+                cards: getDetails(this.bot, inventory.getData().cards),
+                monnaie: `${await this.bot.twitch.levels.get(discordUser.id, true)} ${this.bot.config.twitch.monnaie.symbol}`,
+                link: this.bot.config.cards_img_link,
+                card_max: this.bot.config.card_max,
+                rarity,
+                cartes,
+            });
+        })
     }
 
     loadCallbacks() {
@@ -118,3 +150,11 @@ class Webserver {
 }
 
 module.exports = Webserver;
+
+function getDetails(bot, data) {
+    let formatedData = [];
+    Object.entries(data).forEach(([key, value]) => {
+        formatedData.push({ quantity: value, ...bot.cards.getCardData(key) });
+    });
+    return formatedData;
+};

@@ -25,7 +25,7 @@ module.exports = {
 
     async run(bot, interaction) {
 
-        let monnaie = await bot.db.getMonnaie(interaction.user.id, true);
+        let monnaie = await bot.twitch.levels.get(interaction.user.id, true);
         if (!monnaie) return interaction.reply({ embeds: [errorEmbed("Vous n'avez pas de monnaie ou pas lié votre compte twitch")], ephemeral: true });
 
         const mise = interaction.options.getNumber("mise");

@@ -22,6 +22,11 @@ class TwitchIdCache {
         return user;
     };
 
+    getUser(id) {
+        if (this.cache.has(id)) return this.cache.get(id);
+        return null;
+    };
+
     set(id, user) {
         if (this.cache.has(id)) return null;
         this.cache.set(id, user);

@@ -5,6 +5,8 @@ module.exports = {
     name: Events.InteractionCreate,
     async run(bot, interaction) {
 
+        if (bot.dev) return;
+
         if (interaction.user.bot) return;
         interaction.owner = bot.config.discord.owners.includes(interaction.user.id);
         interaction.twitch = {

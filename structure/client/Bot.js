@@ -14,6 +14,7 @@ class Bot extends Client {
             intents: new IntentsBitField(process.env.DISCORD_INTENTS),
         });
         this.config = config;
+        this.dev = config.dev;
         this.primary = "#ff0000";
         this.db = new Database(this);
         this.twitch = new TwitchBot(this);
