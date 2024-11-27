@@ -20,7 +20,7 @@ module.exports = {
         const twitchId = bot.links.get(interaction.user.id);
         const position = boardData.findIndex(x => x.user == twitchId);
         if (twitchId) {
-            if (position > 9) desc += `\n> <@${boardData[position].user}> ${boardData[position].monnaie} ${bot.config.twitch.monnaie.symbol}`;
+            if (position > 9) desc += `\n> <@${await bot.db.getUsername(boardData[position].user)}> ${boardData[position].monnaie} ${bot.config.twitch.monnaie.symbol}`;
         }
 
         const embed = new EmbedBuilder()

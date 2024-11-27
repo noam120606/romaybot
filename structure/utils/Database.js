@@ -126,9 +126,15 @@ class Database {
         this.bot.links.set(discordId, twitchId);
         return await this.query('INSERT INTO links VALUES (?, ?);', [discordId, twitchId]);
     }
-    async unlink(discordId) {
-        this.bot.links.delete(discordId);
-        return await this.query('DELETE FROM links WHERE discord = ?;', [discordId]);
+    async unlink(opt) {
+        if (opt.discord) {
+            await this.query('DELETE FROM links WHERE discord = ?;', [opt.discord]);
+            this.bot.links.delete(opt.discord);
+        }
+        if (opt.twitch) {
+            await this.query('DELETE FROM links WHERE twitch = ?;', [opt.twitch]);
+            this.bot.links.delete(getByValue(this.bot.links, opt.twitch));
+        }
     }
     async getLinks() {
         return await this.query('SELECT * FROM links;');
@@ -147,3 +153,10 @@ class Database {
 }
 
 module.exports = Database;
+
+function getByValue(map, searchValue) {
+    for (let [key, value] of map.entries()) {
+      if (value === searchValue)
+        return key;
+    }
+}

@@ -21,7 +21,7 @@ module.exports = {
                 
                 if (command.owner && !interaction.owner) return interaction.reply({ embeds: [errorEmbed("Cette commande est seulement utilisable par le créateur du bot")], ephemeral: true });
                 if (command.channels && !command.channels?.includes(interaction.channel.id)) return interaction.reply({ embeds: [errorEmbed(`Cette commande n'est pas utilisable dans ce salon, allez dans : ${command.channels.map(c => `<#${c}>`).join(', ')}`)], ephemeral: true });
-                if (command.must_linked && !bot.links.has(interaction.user.id)) return interaction.reply({ embeds: [errorEmbed("Vous devez lié votre compte twitch pour utiliser cette commande")], ephemeral: true });
+                if (command.must_linked && !bot.links.has(interaction.user.id)) return interaction.reply({ embeds: [errorEmbed("Vous devez lié votre compte twitch pour utiliser cette commande (/twitch login)")], ephemeral: true });
                 
                 await command.run(bot, interaction);
 
