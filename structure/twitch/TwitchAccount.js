@@ -32,6 +32,7 @@ class TwitchBot extends Client {
 
     async start() { 
         await this.users.init();
+        await this.levels.init();
         await this.loadCommands();
         await this.loadEvents();
     }

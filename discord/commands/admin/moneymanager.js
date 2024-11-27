@@ -85,21 +85,21 @@ module.exports = {
 
         switch (subcommand) {
             case "set":
-                await bot.db.setMonnaie(user, monnaie);
+                await bot.twitch.levels.set(user, monnaie);
                 await interaction.reply({ content: `${twitchUsername} possède ${monnaie} ${bot.config.twitch.monnaie.symbol}`, ephemeral: true });
             break;
             case "get":
-                const monnaieUser = await bot.db.getMonnaie(user);
+                const monnaieUser = await bot.twitch.levels.get(user);
                 if (!monnaieUser) return interaction.reply({ embeds: [errorEmbed("Le membre n'a pas de monnaie ou n'a pas lié son compte twitch")], ephemeral: true });
                 await interaction.reply({ content: `${twitchUsername} possède ${monnaieUser} ${bot.config.twitch.monnaie.symbol}`, ephemeral: true });
             break;
             case "add":
-                await bot.db.addMonnaie(user, monnaie);
-                await interaction.reply({ content: `${twitchUsername} possède ${await bot.db.getMonnaie(user)} ${bot.config.twitch.monnaie.symbol}`, ephemeral: true });
+                await bot.twitch.levels.add(user, monnaie);
+                await interaction.reply({ content: `${twitchUsername} possède ${await bot.twitch.levels.get(user)} ${bot.config.twitch.monnaie.symbol}`, ephemeral: true });
             break;
             case "remove":
-                await bot.db.removeMonnaie(user, monnaie);
-                await interaction.reply({ content: `${twitchUsername} possède ${await bot.db.getMonnaie(user)} ${bot.config.twitch.monnaie.symbol}`, ephemeral: true });
+                await bot.twitch.levels.remove(user, monnaie);
+                await interaction.reply({ content: `${twitchUsername} possède ${await bot.twitch.levels.get(user)} ${bot.config.twitch.monnaie.symbol}`, ephemeral: true });
             break;
         }
     }

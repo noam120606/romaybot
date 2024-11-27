@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
 const { errorEmbed } = require('../../../storage/constants.js');
 const progressBar = require('../../../functions/progressBar.js');
 const { cartes, rarity } = require('../../../storage/cartes.js');
@@ -36,8 +36,15 @@ module.exports = {
                 `**Cartes manquantes :** ${bot.config.card_max - userCards.length + 1}`,
                 `${progressBar(progressPercent, 12)} (${progressPercent.toFixed(2)}%)`,
             ].join('\n'));
+        
+        const webButton = new ButtonBuilder()
+            .setStyle(ButtonStyle.Link)
+            .setLabel("Voir le site")
+            .setURL(`https://romaybot.noam120606.fr/`);
+        const row = new ActionRowBuilder()
+            .addComponents(webButton);
 
-        await interaction.reply({ embeds: [embed] });
+        await interaction.reply({ embeds: [embed], components: [row] });
     },
 };
 

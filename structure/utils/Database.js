@@ -35,10 +35,8 @@ class Database {
         const current = await this.getMonnaie(userId, discord);
         if (discord) userId = this.bot.links.get(userId);
         if (discord && !current) return false;
-        if (!current) {
-            await this.query('INSERT INTO monnaie VALUES (?, ?);', [userId, 0]);
-        }
-        await this.query('UPDATE monnaie SET monnaie = ? WHERE user = ?;', [monnaie, userId]);
+        if (!current) await this.query('INSERT INTO monnaie VALUES (?, ?);', [userId, monnaie]);
+        else await this.query('UPDATE monnaie SET monnaie = ? WHERE user = ?;', [monnaie, userId]);
         return current;
     };
     async addMonnaie(userId, monnaie, discord=false) {
@@ -137,7 +135,7 @@ class Database {
     }
 
     async query(sql, params=[]) {
-        //this.bot.log(`SQL request completed : \`${sql}\`${params.length ? ` | Params : \`${params.join(', ')}\`` : ''}`);
+        this.bot.log(`SQL request completed : \`${sql}\`${params.length ? ` | Params : \`${params?.join(', ')}\`` : ''}`);
         return new Promise((resolve, reject) => {
             this.connection.query(sql.replaceAll("'", "''"), params, (err, res) => {
                 if (err) return reject(err);

@@ -42,14 +42,14 @@ module.exports = {
             const level = options.getString("type");
 
             const price = tiers_prices[parseInt(level) - 1];
-            const monnaie = await bot.db.getMonnaie(interaction.user.id, true);
+            const monnaie = await bot.twitch.levels.get(interaction.user.id, true);
             if (monnaie < price) return interaction.editReply({ embeds: [errorEmbed("Vous n'avez pas assez d'argent !")], ephemeral: true });
-            await bot.db.setMonnaie(interaction.user.id, monnaie - price, true);
+            await bot.twitch.levels.remove(interaction.user.id, price, true);
 
             const droppedRarity = await generateRarities(parseInt(level));
             
             const droppedCards = [];
-            for (let i = 0; i < 4; i++) {
+            for (let i = 0; i < 8; i++) {
                 droppedCards.push(await bot.cards.giveRandomCard(interaction.user.id, droppedRarity[i]));
             };
 
@@ -99,6 +99,6 @@ function getRandomRarity(probabilities) {
 function generateRarities(tier) {
     const selectedProbabilities = probabilities_de_drop[tier];
     const rarities = [];
-    for (let i = 0; i < 4; i++) rarities.push(getRandomRarity(selectedProbabilities));
+    for (let i = 0; i < 8; i++) rarities.push(getRandomRarity(selectedProbabilities));
     return rarities;
 };

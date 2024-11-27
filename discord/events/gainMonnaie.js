@@ -5,6 +5,6 @@ module.exports = {
     name: Events.MessageCreate,
     async run(bot, message) {
         if (message.author.bot) return;
-        await bot.db.addMonnaie(message.author.id, randint(5, 15), true);
+        await bot.twitch.levels.add(message.author.id, randint(5, 15), true);
     }
 }

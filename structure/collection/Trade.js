@@ -153,12 +153,12 @@ class Trade {
                         this.bot.db.removeCard(this.targetId, cardId, parseInt(this.trade[this.targetId].cards[cardId]));
                     };
                     if (this.trade[this.requesterId].money > 0) {
-                        this.bot.db.addMonnaie(this.targetId, this.trade[this.requesterId].money, true);
-                        this.bot.db.removeMonnaie(this.requesterId, this.trade[this.requesterId].money, true);
+                        this.bot.twitch.levels.add(this.targetId, this.trade[this.requesterId].money, true);
+                        this.bot.twitch.levels.remove(this.requesterId, this.trade[this.requesterId].money, true);
                     };
                     if (this.trade[this.targetId].money > 0) {
-                        this.bot.db.addMonnaie(this.requesterId, this.trade[this.targetId].money, true);   
-                        this.bot.db.removeMonnaie(this.targetId, this.trade[this.targetId].money, true);
+                        this.bot.twitch.levels.add(this.requesterId, this.trade[this.targetId].money, true);   
+                        this.bot.twitch.levels.remove(this.targetId, this.trade[this.targetId].money, true);
                     };
                 };
                 break;
@@ -263,7 +263,7 @@ class Trade {
             };
             case 'setMoney': {
                 const amount = interaction.fields.getTextInputValue('amount');
-                const money = await this.bot.db.getMonnaie(interaction.user.id, true);
+                const money = await this.bot.twitch.levels.get(interaction.user.id, true);
                 if (amount > money) return await interaction.reply({ embeds: [errorEmbed(`Vous n'avez que ${money} ${this.bot.config.twitch.monnaie.symbol} !`)], ephemeral: true, });
                 this.setMoney(interaction.user.id, amount);
                 this.refreshMsg();

@@ -44,7 +44,7 @@ module.exports = {
         if (roulette == 'rouge') string += `${num} (🔴 Rouge)`
         if (roulette == 'vert') string += `${num} (🟢 Vert)`;
 
-        bot.db[roulette == couleur ? 'addMonnaie' : 'removeMonnaie'](interaction.user.id, roulette == 'vert' && roulette == couleur ? mise*50 : mise, true);
+        bot.twitch.levels[roulette == couleur ? 'add' : 'remove'](interaction.user.id, roulette == 'vert' && roulette == couleur ? mise*50 : mise, true);
         await interaction.reply(`${string} | Vous avez ${roulette == couleur ? 'gagné' : 'perdu'} ${roulette == 'vert' && roulette == couleur ? mise*50 : mise} ${bot.config.twitch.monnaie.symbol} !`);
 
     }
