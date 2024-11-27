@@ -175,6 +175,61 @@ module.exports = {
             "name": "Graisss",
             "rarity": 0,
             "type": "Collection"
+        },
+
+        { // doigtueur
+            "id": 27,
+            "name": "Doigtueur",
+            "rarity": 8,
+            "type": "Collection"
+        },
+        {
+            "id": 28,
+            "name": "Doigtueur",
+            "rarity": 7,
+            "type": "Collection"
+        },
+        {
+            "id": 29,
+            "name": "Doigtueur",
+            "rarity": 6,
+            "type": "Collection"
+        },
+        {
+            "id": 30,
+            "name": "Doigtueur",
+            "rarity": 5,
+            "type": "Collection"
+        },
+        {
+            "id": 31,
+            "name": "Doigtueur",
+            "rarity": 4,
+            "type": "Collection"
+        },
+        {
+            "id": 32,
+            "name": "Doigtueur",
+            "rarity": 3,
+            "type": "Collection"
+        },
+        {
+            "id": 33,
+            "name": "Doigtueur",
+            "rarity": 2,
+            "type": "Collection"
+        },
+        {
+            "id": 34,
+            "name": "Doigtueur",
+            "rarity": 1,
+            "type": "Collection"
+        },
+        {
+            "id": 35,
+            "name": "Doigtueur",
+            "rarity": 0,
+            "type": "Collection"
         }
     ]
 }

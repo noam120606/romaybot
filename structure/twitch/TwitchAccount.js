@@ -70,7 +70,7 @@ class TwitchBot extends Client {
                 owner: this.config.twitch.owners.includes(tags.username),
                 date: Date.now(),
             }
-            console.log(data);
+            this.bot.log(`Twitch Chat [${data.channel}] <${data.username}> ${data.message}`, 'info');
             await messageEventFile(this.bot, data);
             this.events.emit('message', data);
             this.msgCache.push(data);
