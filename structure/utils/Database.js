@@ -141,7 +141,7 @@ class Database {
     }
 
     async query(sql, params=[]) {
-        this.bot.log(`SQL request completed : \`${sql}\`${params.length ? ` | Params : \`${params?.join(', ')}\`` : ''}`);
+        try { this.bot.log(`SQL request completed : \`${sql}\`${params.length ? ` | Params : \`${params?.join(', ')}\`` : ''}`) } catch (e) {};
         return new Promise((resolve, reject) => {
             this.connection.query(sql.replaceAll("'", "''"), params, (err, res) => {
                 if (err) return reject(err);

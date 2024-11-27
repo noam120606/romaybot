@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
 const { cartes, rarity } = require('../../storage/cartes.js');
 const maj = require('../../functions/maj.js');
 
@@ -9,7 +10,14 @@ class Webserver {
         this.app.use(session({
             secret: options.session_secret || process.env.SESSION_SECRET || 'secret',
             resave: false,
-            saveUninitialized: true 
+            saveUninitialized: true ,
+            store: new MySQLStore({
+                host: process.env.DB_HOST,
+                user: process.env.DB_USER,
+                password: process.env.DB_PASS,
+                database: process.env.DB_NAME,
+                port: process.env.DB_PORT ?? 3306,
+            }),
         }));
         this.app.set('view engine', 'ejs');
         this.port = options.port || process.env.WEB_PORT || 8080;
