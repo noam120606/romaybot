@@ -153,12 +153,12 @@ class Trade {
                         this.bot.db.removeCard(this.targetId, cardId, parseInt(this.trade[this.targetId].cards[cardId]));
                     };
                     if (this.trade[this.requesterId].money > 0) {
-                        this.bot.twitch.levels.add(this.targetId, this.trade[this.requesterId].money, true);
-                        this.bot.twitch.levels.remove(this.requesterId, this.trade[this.requesterId].money, true);
+                        this.bot.twitch.levels.add(this.targetId, parseInt(this.trade[this.requesterId].money), true);
+                        this.bot.twitch.levels.remove(this.requesterId, parseInt(this.trade[this.requesterId].money), true);
                     };
                     if (this.trade[this.targetId].money > 0) {
-                        this.bot.twitch.levels.add(this.requesterId, this.trade[this.targetId].money, true);   
-                        this.bot.twitch.levels.remove(this.targetId, this.trade[this.targetId].money, true);
+                        this.bot.twitch.levels.add(this.requesterId, parseInt(this.trade[this.targetId].money), true);   
+                        this.bot.twitch.levels.remove(this.targetId, parseInt(this.trade[this.targetId].money), true);
                     };
                 };
                 break;

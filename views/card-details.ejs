@@ -21,7 +21,7 @@
                                 class="card-img-top" 
                                 alt="Carte <%= rarity[i]?.name || 'Unknown' %>">
                             <div class="card-body">
-                                <h5 class="card-title"><%= rarity[i]?.name || 'Unknown' %></h5>
+                                <h5 class="card-title">[#<%= cards.find(x => x.rarity == rarity[i]?.id).id %>] <%= rarity[i]?.name || 'Unknown' %></h5>
                             </div>
                         </div>
                     </div>

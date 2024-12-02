@@ -32,9 +32,9 @@ class MonnaieManager {
         if (!userId) return null;
         if (this.cache.has(userId)) return this.cache.get(userId);
         const monnaie = await this.bot.db.getMonnaie(userId);
-        if (!monnaie) return null;
+        if (!monnaie) return 0;
         this.cache.set(userId, monnaie);
-        return monnaie;
+        return parseInt(monnaie);
     };
 
     async set(userId, amount, discord=false) {
@@ -44,11 +44,11 @@ class MonnaieManager {
 
     async add(userId, amount, discord=false) {
         const current = await this.get(userId, discord);
-        return await this.set(userId, amount + current, discord);
+        return await this.set(userId, parseInt(amount) + parseInt(current), discord);
     };
 
     async remove(userId, amount, discord=false) {
-        return await this.add(userId, -amount, discord);
+        return await this.add(userId, -parseInt(amount), discord);
     };
 
     async getLeaderboard() {

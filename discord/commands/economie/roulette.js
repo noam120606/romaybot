@@ -3,6 +3,7 @@ const { errorEmbed } = require('../../../storage/constants.js');
 const randint = require('../../../functions/randint.js');
 
 module.exports = {
+    channels_blacklist: ['1309524945159716884', '1309525359854620763'],
     data: new SlashCommandBuilder()
         .setName("roulette")
         .setDescription("Jouez au jeu de la roulette")

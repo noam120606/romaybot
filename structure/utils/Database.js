@@ -28,22 +28,22 @@ class Database {
     async getMonnaie(userId, discord=false) {
         if (discord) userId = this.bot.links.get(userId);
         const res = await this.query('SELECT * FROM monnaie WHERE user = ?;', [userId]);
-        if (!res) return null;
+        if (!res?.length) return null;
         return parseInt(res[0].monnaie);
     };
     async setMonnaie(userId, monnaie, discord=false) {
         const current = await this.getMonnaie(userId, discord);
         if (discord) userId = this.bot.links.get(userId);
-        if (discord && !current) return false;
-        if (!current) await this.query('INSERT INTO monnaie VALUES (?, ?);', [userId, monnaie]);
+        if (discord && current===null) return false;
+        if (current===null) await this.query('INSERT INTO monnaie VALUES (?, ?);', [userId, monnaie]);
         else await this.query('UPDATE monnaie SET monnaie = ? WHERE user = ?;', [monnaie, userId]);
         return current;
     };
     async addMonnaie(userId, monnaie, discord=false) {
         const current = await this.getMonnaie(userId, discord);
         if (discord) userId = this.bot.links.get(userId);
-        if (discord && !current) return false;
-        if (!current) {
+        if (discord && current===null) return false;
+        if (current===null) {
             await this.query('INSERT INTO monnaie VALUES (?, ?);', [userId, 0]);
         }
         await this.query('UPDATE monnaie SET monnaie = ? WHERE user = ?;', [parseInt(monnaie) + current, userId]);
@@ -85,7 +85,7 @@ class Database {
     };
     async giveCard(userId, id, amount=1) {
         const current = await this.getCards(userId, id);
-        await this.query('UPDATE cards SET quantity = ? WHERE user = ? AND card = ?;', [current + amount, userId, id]);
+        await this.query('UPDATE cards SET quantity = ? WHERE user = ? AND card = ?;', [`${current + amount}`, `${userId}`, `${id}`]);
         return current;
     };
     async removeCard(userId, id, amount=1) {
@@ -140,7 +140,7 @@ class Database {
         return await this.query('SELECT * FROM links;');
     }
 
-    async query(sql, params=[]) {
+    query(sql, params=[]) {
         try { this.bot.log(`SQL request completed : \`${sql}\`${params.length ? ` | Params : \`${params?.join(', ')}\`` : ''}`) } catch (e) {};
         return new Promise((resolve, reject) => {
             this.connection.query(sql.replaceAll("'", "''"), params, (err, res) => {

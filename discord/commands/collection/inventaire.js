@@ -3,7 +3,7 @@ const { errorEmbed } = require('../../../storage/constants.js');
 const { card_max } = require('../../../config.js');
 
 module.exports = {
-    channels: ['1309525539840593940'],
+    channels: ['1309525359854620763', '1309525539840593940'],
     must_linked: true,
     data: new SlashCommandBuilder()
         .setName("inventaire")

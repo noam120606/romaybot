@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const e = require('../../../storage/emojis.js');
 const { errorEmbed } = require('../../../storage/constants.js');
 
 module.exports = {
@@ -34,7 +33,7 @@ module.exports = {
         await bot.twitch.levels.remove(user.id, amount, true);
         await bot.twitch.levels.add(interaction.user.id, amount, true);
 
-        interaction.reply(`<@${interaction.user.id}> à donné ${amount} ${e.monnaie} à <@${user.id}> !`);
+        interaction.reply(`<@${interaction.user.id}> à donné ${amount} ${bot.config.twitch.monnaie.symbol} à <@${user.id}> !`);
 
     },
 };

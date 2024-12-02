@@ -10,10 +10,11 @@
     "express-session": "^1.18.1",
     "moment": "^2.30.1",
     "mysql": "^2.18.1",
+    "node-cron": "^3.0.3",
     "tmi.js": "^1.8.5"
   },
   "name": "romaybot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

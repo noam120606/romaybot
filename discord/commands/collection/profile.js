@@ -4,7 +4,7 @@ const progressBar = require('../../../functions/progressBar.js');
 const { cartes, rarity } = require('../../../storage/cartes.js');
 
 module.exports = {
-    channels: ['1309524945159716884'],
+    channels: ['1309525359854620763', '1309525539840593940', '1311134243266498691', '1309915134113746995'],
     data: new SlashCommandBuilder()
         .setName("profile")
         .setDescription("Donne le profil d'un membre")

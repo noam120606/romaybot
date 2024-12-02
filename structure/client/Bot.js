@@ -91,6 +91,10 @@ class Bot extends Client {
         };
         this.log(`Loaded ${count} interactions`, 'debug');
     }
+
+    async save() {
+        await this.twitch.levels.syncToDb();
+    }
 }
 
 module.exports = Bot;

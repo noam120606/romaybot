@@ -19,7 +19,7 @@
             <div class="row">
                 <% for(var i=0; i < users?.length; i++) {%>
                     <div class="col-md-4 mb-4">
-                        <a href="user/<%= users[i].discordId %>" class="card-link">
+                        <a href="/user/<%= users[i].discordId %>" class="card-link">
                             <div class="card">
                                 <img src="<%= users[i].discordAvatar %>" class="card-img-top" alt="Photo de profil de <%= users[i].discordName %>">
                                 <div class="card-body">

@@ -39,6 +39,7 @@ class Webserver {
         this.app.get('/', (req, res) => {
             res.render('card-list', {
                 cards: cardsNames,
+
                 link: this.bot.config.cards_img_link,
             });
         });
@@ -50,6 +51,7 @@ class Webserver {
                 name: maj(cards[0].name.toLowerCase()),
                 rarity: rarityAvailable,
                 link: this.bot.config.cards_img_link,
+                cards,
             });
         });
         this.app.get('/user', (req, res) => {

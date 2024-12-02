@@ -56,6 +56,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setColor(tiers_colors[parseInt(level) - 1])
                 .setTitle("Booster acheté")
+                .setThumbnail(bot.config.twitch.monnaie.booster_link.replace("{level}", level))
                 .setDescription(`Vous avez acheté un booster de tier **${tiers[parseInt(level) - 1]}** pour ${tiers_prices[parseInt(level)-1]} ${symbol}`)
                 .addFields(
                     { name: "Cartes obtenues", value: droppedCards.map(c => `#${c.id} ${c.name} **[${c.rarityName}]** ${c.newCard ? e.multipart_new : ""}`).join("\n") }
